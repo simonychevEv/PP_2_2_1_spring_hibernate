@@ -1,9 +1,14 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
+@Component
 public class User {
 
    @Id
@@ -21,7 +26,7 @@ public class User {
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "car_id")
    private Car car;
-
+   @Autowired
    public User() {}
 
    public Car getCar() {
@@ -78,9 +83,26 @@ public class User {
    }
 
    @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      User user = (User) o;
+      return id.equals(user.id) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && email.equals(user.email) && Objects.equals(car, user.car);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(id, firstName, lastName, email, car);
+   }
+
+   @Override
    public String toString() {
-      return car +
-              ", firstName='" + firstName +
-              ", lastName='" + lastName;
+      return "User{" +
+              "\n id=" + id +
+              ",\n firstName=" + firstName +
+              ",\n lastName=" + lastName +
+              ",\n email=" + email +
+              ",\n car=" + car +
+              '}';
    }
 }
