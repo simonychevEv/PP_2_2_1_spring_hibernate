@@ -26,8 +26,6 @@ public class User {
    @OneToOne(cascade = CascadeType.ALL)
    @JoinColumn(name = "car_id")
    private Car car;
-   @Autowired
-   public User() {}
 
    public Car getCar() {
       return car;
@@ -36,13 +34,14 @@ public class User {
    public void setCar(Car car) {
       this.car = car;
    }
-
+   public User() {}
+   @Autowired(required = false)
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
    }
-
+   @Autowired(required = false)
    public User(String firstName, String lastName, String email, Car car) {
       this.firstName = firstName;
       this.lastName = lastName;

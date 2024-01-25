@@ -16,12 +16,16 @@ public class Car {
     @Column(name = "model")
     private String model;
     @Column(name = "series")
-
     private int series;
-    @Autowired
-    public Car() {}
     @OneToOne(mappedBy = "car")
     private User user;
+
+    public Car() { }
+    @Autowired(required = false)
+    public Car(String model, int series) {
+        this.model = model;
+        this.series = series;
+    }
 
     public String getModel() {
         return model;
@@ -36,11 +40,6 @@ public class Car {
     }
 
     public void setSeries(int series) {
-        this.series = series;
-    }
-
-    public Car(String model, int series) {
-        this.model = model;
         this.series = series;
     }
 

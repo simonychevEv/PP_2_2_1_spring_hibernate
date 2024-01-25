@@ -31,7 +31,7 @@ public class MainApp {
          System.out.println();
       }
       // Проверка Usera по автомобилю
-      System.out.println("Владелец автомобиля - " + userService.getUserByCar(car1));
+      System.out.println("Владелец автомобиля - " + userService.getUserByCar(car2));
       context.close();
    }
 }
